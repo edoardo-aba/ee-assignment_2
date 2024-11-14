@@ -3,18 +3,18 @@
     box-sizing: border-box;
 }
 
-::selection { color: #EBE9E1;background-color: #E43D12 ; }
-::-moz-selection { color: #EBE9E1;background-color: #E43D12 ; }
-::-webkit-scrollbar{
-  width: 10px;
+::selection { color: #EBE9E1; background-color: #E43D12; }
+::-moz-selection { color: #EBE9E1; background-color: #E43D12; }
+::-webkit-scrollbar {
+    width: 10px;
 }
-::-webkit-scrollbar-track{
-  background: white;
-  border-radius: 50px;
+::-webkit-scrollbar-track {
+    background: white;
+    border-radius: 50px;
 }
-::-webkit-scrollbar-thumb{
-  background: #E43D12;
-  border-radius: 50px;
+::-webkit-scrollbar-thumb {
+    background: #E43D12;
+    border-radius: 50px;
 }
 
 html, body {
@@ -42,21 +42,21 @@ html, body {
 .header.scrolled {
     background-color: #E43D12;
     color: #EBE9E1;
-    a{
-        color: #EBE9E1;
-    }
+}
+
+.header.scrolled a {
+    color: #EBE9E1;
 }
 
 .header h1 {
     margin: 0;
     font-size: 1.5em;
-    cursor:default;
-    
+    cursor: default;
 }
 
 .header nav ul {
     list-style: none;
-    padding: 0;
+    padding-right: 30px;
     margin: 0;
     display: flex;
     gap: 50px;
@@ -66,15 +66,25 @@ html, body {
     display: inline;
 }
 
-.header nav ul li a {
+/* Apply styles to both a tags and button elements in the nav */
+.header nav ul li a,
+.header nav ul li button {
     color: #E43D12;
-    text-decoration: none;
+    background: none;
+    border: none;
     font-size: 1em;
+    font-family: inherit;
+    text-decoration: none;
+    cursor: pointer;
     display: inline-block;
-    transition: transform 0.2s ease; /* Smooth transition for scaling */
+    transition: transform 0.2s ease;
+    outline: none;
+    font-weight: bold;
 }
 
-.header nav ul li a:hover {
-    transform: scale(1.1); /* Slightly enlarge the link on hover */
+/* Hover effect for both a tags and button elements */
+.header nav ul li a:hover,
+.header nav ul li button:hover {
+    transform: scale(1.1);
     text-decoration: none;
 }

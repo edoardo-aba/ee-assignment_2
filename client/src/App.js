@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import Introduction from './components/Introduction/Introduction';
+import SignUp from './components/SignUp/SignUp';
 
 function App() {
   const [backendData, setBackendData] = useState([{}]);
@@ -17,9 +19,14 @@ function App() {
 
   return (
     <div>
-      <Header />
-      <Introduction />
-      
+      <Router>
+        <Header /> {/* This will always be rendered, regardless of the route */}
+        <Routes>
+          <Route path="/" element={<Introduction />} />
+          <Route path="/signup" element={<SignUp />} />
+          <Route path="/about" element={<div>About Page</div>} /> 
+        </Routes>
+      </Router>
     </div>
   );
 }
