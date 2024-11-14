@@ -1,9 +1,9 @@
 // src/components/SignUp/SignUp.js
 
 import React, { useState } from 'react';
-import './SignUp.css';
+import './LogIn.css';
 
-function SignUp() {
+function LogIn() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -71,4 +71,4 @@ function SignUp() {
   );
 }
 
-export default SignUp;
+export default LogIn;

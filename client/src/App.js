@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header/Header';
 import Introduction from './components/Introduction/Introduction';
 import SignUp from './components/SignUp/SignUp';
+import LogIn from './components/Login/LogIn';
 
 function App() {
   const [backendData, setBackendData] = useState([{}]);
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Introduction />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/login" element={<LogIn />} />
           <Route path="/about" element={<div>About Page</div>} /> 
         </Routes>
       </Router>
