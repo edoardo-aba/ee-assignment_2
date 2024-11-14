@@ -1,0 +1,80 @@
+/* Apply border-box sizing globally */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+::selection { color: #EBE9E1;background-color: #E43D12 ; }
+::-moz-selection { color: #EBE9E1;background-color: #E43D12 ; }
+::-webkit-scrollbar{
+  width: 10px;
+}
+::-webkit-scrollbar-track{
+  background: white;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-thumb{
+  background: #E43D12;
+  border-radius: 50px;
+}
+
+html, body {
+    margin: 0 auto;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #EBE9E1;
+    color: #E43D12;
+    font-weight: bold;
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+    background-color: #EBE9E1;
+    transition: background-color 0.3s ease;
+    z-index: 1000;
+}
+
+.header.scrolled {
+    background-color: #E43D12;
+    color: #EBE9E1;
+    a{
+        color: #EBE9E1;
+    }
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.5em;
+    cursor:default;
+    
+}
+
+.header nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 50px;
+}
+
+.header nav ul li {
+    display: inline;
+}
+
+.header nav ul li a {
+    color: #E43D12;
+    text-decoration: none;
+    font-size: 1em;
+    display: inline-block;
+    transition: transform 0.2s ease; /* Smooth transition for scaling */
+}
+
+.header nav ul li a:hover {
+    transform: scale(1.1); /* Slightly enlarge the link on hover */
+    text-decoration: none;
+}
