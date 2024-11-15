@@ -1,0 +1,2 @@
+- create button from the login to the sign up where i say you dont have an account?
+- same for the signup where i say do you already have an account?
