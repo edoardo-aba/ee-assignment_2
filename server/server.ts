@@ -2,8 +2,12 @@ require('dotenv').config(); // Import dotenv and configure it
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('cors'); // Import cors middleware
 
 const app = express();
+
+// Enable CORS to allow requests from any origin
+app.use(cors());
 
 // Middleware to parse JSON
 app.use(bodyParser.json());
@@ -11,24 +15,13 @@ app.use(express.json());
 
 // Connect to MongoDB using the connection string from the .env file
 const mongoUri = process.env.MONGO_URI;
-// mongoose.connect('mongodb://localhost:27017/register');
-
-mongoose.connect(mongoUri)
+mongoose.connect(mongoUri);
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', async () => {
   console.log('Connected to MongoDB');
-
-  // try {
-  //   // Attempt to fetch all documents from the 'users' collection
-  //   const users = await User.find({});
-  //   console.log('Users collection data:', users);
-  // } catch (error) {
-  //   console.error('Error retrieving users collection:', error);
-  // }
 });
-
 
 // Middleware to log the request type and request body
 app.use((req, res, next) => {
@@ -131,7 +124,8 @@ app.post('/api/submit-answers', async (req, res) => {
   }
 });
 
-// Start server
-app.listen(5000, () => {
-  console.log('Server is running on http://localhost:5000');
+// Start server and allow connections from any IP
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
