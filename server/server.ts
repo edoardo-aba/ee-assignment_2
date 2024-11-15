@@ -1,3 +1,4 @@
+require('dotenv').config(); // Import dotenv and configure it
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -8,14 +9,26 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.json());
 
-// Connect to MongoDB with `users` as the database name
-mongoose.connect('mongodb://localhost:27017/register');
+// Connect to MongoDB using the connection string from the .env file
+const mongoUri = process.env.MONGO_URI;
+// mongoose.connect('mongodb://localhost:27017/register');
+
+mongoose.connect(mongoUri)
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
+db.once('open', async () => {
   console.log('Connected to MongoDB');
+
+  // try {
+  //   // Attempt to fetch all documents from the 'users' collection
+  //   const users = await User.find({});
+  //   console.log('Users collection data:', users);
+  // } catch (error) {
+  //   console.error('Error retrieving users collection:', error);
+  // }
 });
+
 
 // Middleware to log the request type and request body
 app.use((req, res, next) => {
