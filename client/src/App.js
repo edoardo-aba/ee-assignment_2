@@ -5,10 +5,9 @@ import Header from './components/Header/Header';
 import Introduction from './components/Introduction/Introduction';
 import SignUp from './components/SignUp/SignUp';
 import LogIn from './components/Login/LogIn';
+import Container from './components/Container/Container';
 
 function App() {
-
-
   return (
     <div>
       <Router>
@@ -17,6 +16,7 @@ function App() {
           <Route path="/" element={<Introduction />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
+          <Route path="/test" element={<Container />} />
           <Route path="/about" element={<div>About Page</div>} /> 
         </Routes>
       </Router>

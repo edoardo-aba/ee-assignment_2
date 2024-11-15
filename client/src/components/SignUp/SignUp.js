@@ -1,7 +1,9 @@
+// src/components/SignUp/SignUp.js
 import React, { useState } from 'react';
-import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
+import { handleSignup } from '../../api'; // Import the API function
 import './SignUp.css';
 
 function SignUp() {
@@ -16,6 +18,8 @@ function SignUp() {
     programmingExperience: '',
     occupation: '',
   });
+
+  const navigate = useNavigate(); // Initialize useNavigate hook
 
   const handleChange = (e) => {
     setFormData({
@@ -32,13 +36,13 @@ function SignUp() {
     }
 
     try {
-      const response = await axios.post('/api/signup', formData);
-      if (response.status === 201) {
-        toast.success('User data saved successfully');
-      }
+      const user = await handleSignup(formData); // Use the API utility function
+      toast.success('Sign up successful');
+      localStorage.setItem('user', JSON.stringify(user)); // Save user data to localStorage
+      navigate('/test'); // Redirect to /test on successful signup
     } catch (error) {
-      toast.error('Failed to save user data');
-      console.error('Error saving data:', error);
+      toast.error(error.message || 'Failed to sign up');
+      console.error('Error during sign up:', error);
     }
   };
 

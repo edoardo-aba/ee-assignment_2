@@ -1,0 +1,30 @@
+.container {
+    display: flex;
+    align-items:center;        /* Center vertically */
+    justify-content: center;    /* Center horizontally */
+    flex-direction: column;
+    max-width: 900px;
+    margin: 10% auto;
+    padding: 40px;
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+    min-height: 50vh;
+    
+  }
+  
+  .question {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 40px;
+  }
+  
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* 2 columns */
+    gap: 20px;
+    width: 80%; /* Adjust width as needed */
+    max-width: 600px;
+    margin: auto;
+  }
+  

@@ -1,6 +1,6 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import bodyParser from 'body-parser';
+const express = require('express');
+const mongoose = require('mongoose');
+const bodyParser = require('body-parser');
 
 const app = express();
 
@@ -24,33 +24,77 @@ app.use((req, res, next) => {
 });
 
 // Define Mongoose Schema with specific collection name
-const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  password: String,
-  age: Number,
-  gender: String,
-  language: String,
-  educationLevel: String,
-  programmingExperience: Number,
-  occupation: String,
-}, { collection: 'users' }); // Explicitly set the collection name
+const userSchema = new mongoose.Schema(
+  {
+    name: String,
+    email: { type: String, required: true },
+    password: { type: String, required: true },
+    age: Number,
+    gender: String,
+    language: String,
+    educationLevel: String,
+    programmingExperience: Number,
+    occupation: String,
+  },
+  { collection: 'users' }
+);
 
 // Define Mongoose Model
 const User = mongoose.model('User', userSchema);
 
-// Endpoint to handle form data
+// Endpoint to handle signup
 app.post('/api/signup', async (req, res) => {
   try {
-    const userData = req.body;
-    const newUser = new User(userData);
-    await newUser.save();
-    res.status(201).json({ message: 'User data saved successfully' });
+    const { name, email, password, ...otherDetails } = req.body;
+
+    const newUser = new User({ name, email, password, ...otherDetails });
+    const savedUser = await newUser.save();
+
+    res.status(201).json({ 
+      message: 'User registered successfully', 
+      user: { id: savedUser._id, email: savedUser.email } 
+    });
   } catch (error) {
+    console.error('Signup Error:', error);
     res.status(500).json({ error: 'Failed to save user data' });
   }
 });
 
+// Endpoint to handle login
+app.post('/api/login', async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email, password });
+    console.log('User:', user);
+    if (!user) {
+      return res.status(404).json({ error: 'Invalid email or password' });
+    }
+
+    res.status(200).json({ 
+      message: 'Login successful', 
+      user: { id: user._id, email: user.email } 
+    });
+  } catch (error) {
+    console.error('Login Error:', error);
+    res.status(500).json({ error: 'Failed to login' });
+  }
+});
+
+// Endpoint to handle submission of answers
+app.post('/api/submit-answers', async (req, res) => {
+  try {
+    const { results } = req.body;
+
+    // Process and save results to the database if necessary
+    console.log('Received Results:', results);
+
+    res.status(200).json({ message: 'Results saved successfully' });
+  } catch (error) {
+    console.error('Error saving results:', error);
+    res.status(500).json({ error: 'Failed to save results' });
+  }
+});
 
 // Start server
 app.listen(5000, () => {
