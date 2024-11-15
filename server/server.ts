@@ -7,7 +7,14 @@ const cors = require('cors'); // Import cors middleware
 const app = express();
 
 // Enable CORS to allow requests from any origin
-app.use(cors());
+app.use(cors({
+  origin: (origin, callback) => {
+    callback(null, true); // Allow all origins
+  },
+  methods: ['POST', 'GET', 'DELETE', 'PUT'], // Allowed HTTP methods
+  credentials: true // Allow credentials to be sent
+}));
+
 
 // Middleware to parse JSON
 app.use(bodyParser.json());
