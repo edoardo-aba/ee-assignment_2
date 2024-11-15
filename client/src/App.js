@@ -7,16 +7,7 @@ import SignUp from './components/SignUp/SignUp';
 import LogIn from './components/Login/LogIn';
 
 function App() {
-  const [backendData, setBackendData] = useState([{}]);
 
-  useEffect(() => {
-    fetch('/api')
-      .then((res) => res.json())
-      .then((data) => {
-        setBackendData(data);
-      })
-      .catch((err) => console.log(err));
-  }, []); // Empty array to run only once
 
   return (
     <div>

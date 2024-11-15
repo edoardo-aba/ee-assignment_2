@@ -1,6 +1,5 @@
-// src/components/SignUp/SignUp.js
-
 import React, { useState } from 'react';
+import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './SignUp.css';
@@ -25,19 +24,28 @@ function SignUp() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (formData.password.length < 6) {
       toast.error('Password must be at least 6 characters long.');
       return;
     }
-    console.log('Form submitted', formData);
+
+    try {
+      const response = await axios.post('/api/signup', formData);
+      if (response.status === 201) {
+        toast.success('User data saved successfully');
+      }
+    } catch (error) {
+      toast.error('Failed to save user data');
+      console.error('Error saving data:', error);
+    }
   };
 
   return (
     <div className="sign-up-form">
       <h2>Sign Up</h2>
-      
+
       {/* ToastContainer to render the toast notifications */}
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
 
