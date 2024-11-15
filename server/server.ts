@@ -9,10 +9,7 @@ app.use(bodyParser.json());
 app.use(express.json());
 
 // Connect to MongoDB with `users` as the database name
-mongoose.connect('mongodb://localhost:27017/register', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect('mongodb://localhost:27017/register')
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
