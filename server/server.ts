@@ -6,9 +6,13 @@ const app = express();
 
 // Middleware to parse JSON
 app.use(bodyParser.json());
+app.use(express.json());
 
 // Connect to MongoDB with `users` as the database name
-mongoose.connect('mongodb://localhost:27017/register');
+mongoose.connect('mongodb://localhost:27017/register', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
 
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
@@ -23,7 +27,7 @@ app.use((req, res, next) => {
   next(); // Proceed to the next middleware or route handler
 });
 
-// Define Mongoose Schema with specific collection name
+// Define Mongoose Schema for users
 const userSchema = new mongoose.Schema(
   {
     name: String,
@@ -39,8 +43,25 @@ const userSchema = new mongoose.Schema(
   { collection: 'users' }
 );
 
-// Define Mongoose Model
 const User = mongoose.model('User', userSchema);
+
+// Define Mongoose Schema for answers
+const answerSchema = new mongoose.Schema(
+  {
+    userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
+    email: { type: String, required: true },
+    answers: [
+      {
+        text: { type: String, required: true },
+        selected: { type: String, required: true },
+        correct: { type: Boolean, required: true },
+      },
+    ],
+  },
+  { collection: 'answers' } // Explicitly set the collection name
+);
+
+const Answer = mongoose.model('Answer', answerSchema);
 
 // Endpoint to handle signup
 app.post('/api/signup', async (req, res) => {
@@ -84,9 +105,12 @@ app.post('/api/login', async (req, res) => {
 // Endpoint to handle submission of answers
 app.post('/api/submit-answers', async (req, res) => {
   try {
-    const { results } = req.body;
+    const results = req.body;
 
-    // Process and save results to the database if necessary
+    // Save results to the answers collection
+    const newAnswer = new Answer(results);
+    await newAnswer.save();
+
     console.log('Received Results:', results);
 
     res.status(200).json({ message: 'Results saved successfully' });
