@@ -67,6 +67,12 @@ const answerSchema = new mongoose.Schema(
 
 const Answer = mongoose.model('Answer', answerSchema);
 
+// test route for vercel
+app.get('/', (req, res) => {
+  res.send('Hello, World!');
+});
+
+
 // Endpoint to handle signup
 app.post('/api/signup', async (req, res) => {
   try {
