@@ -41,6 +41,7 @@ function LogIn() {
       localStorage.setItem('user', JSON.stringify(user)); // Save user data to localStorage here
       navigate('/test'); // Redirect to /test on successful login
     } catch (error) {
+      console.log(error.message || 'Failed to log in');
       setError(error.message || 'Failed to log in');
       toast.error(error.message || 'Failed to log in');
     } finally {
