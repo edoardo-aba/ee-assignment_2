@@ -88,7 +88,7 @@ const Container = () => {
       localStorage.removeItem('user'); // This clears the user's session or data
       const timer = setTimeout(() => {
         navigate('/'); // Redirect to the home page
-      }, 3000);
+      }, 5000);
     }
   }, [finished, results, timeTaken]);
 
