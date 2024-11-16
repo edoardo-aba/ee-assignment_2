@@ -1,5 +1,3 @@
-// src/components/Header/Header.js
-
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Header.css'; // Import the external CSS file
@@ -21,10 +19,12 @@ function Header() {
 
   return (
     <header className={`header ${scrolled ? 'scrolled' : ''}`}>
-      <h1>¿who_is_the_best?</h1>
+      {/* Added onClick to h1 */}
+      <h1 onClick={() => navigate('/')} style={{ cursor: 'pointer' }}>
+        who's the best?
+      </h1>
       <nav>
         <ul>
-          {/* Replace <a> tags with <button> for navigation */}
           <li>
             <button onClick={() => navigate('/')}>home</button>
           </li>

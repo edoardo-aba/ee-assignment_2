@@ -136,26 +136,55 @@ app.get('/api/download-csv', async (req, res) => {
 
     // Fetch all users once to minimize database calls
     const users = await User.find().lean();
-    const userMap = new Map(users.map(user => [user.email, user.name]));
+
+    // Create a map for quick access to user demographics by email
+    const userMap = new Map(
+      users.map(user => [
+        user.email,
+        {
+          name: user.name,
+          age: user.age,
+          gender: user.gender,
+          language: user.language,
+          educationLevel: user.educationLevel,
+          programmingExperience: user.programmingExperience,
+          occupation: user.occupation,
+        },
+      ])
+    );
 
     // Prepare records for CSV
-    const records = answers.map(answer => ({
-      email: answer.email,
-      name: userMap.get(answer.email) || 'Unknown', // Match name by email, fallback to 'Unknown'
-      timeTaken: answer.timeTaken,
-      answers: JSON.stringify(answer.answers),
-    }));
+    const records = answers.map(answer => {
+      const user = userMap.get(answer.email) || {};
+      return {
+        email: answer.email,
+        name: user.name || 'Unknown',
+        age: user.age || 'N/A',
+        gender: user.gender || 'N/A',
+        language: user.language || 'N/A',
+        educationLevel: user.educationLevel || 'N/A',
+        programmingExperience: user.programmingExperience || 'N/A',
+        occupation: user.occupation || 'N/A',
+        timeTaken: answer.timeTaken,
+        answers: JSON.stringify(answer.answers),
+      };
+    });
 
     // Define CSV header
     const header = [
       { id: 'email', title: 'Email' },
       { id: 'name', title: 'Name' },
+      { id: 'age', title: 'Age' },
+      { id: 'gender', title: 'Gender' },
+      { id: 'language', title: 'Language' },
+      { id: 'educationLevel', title: 'Education Level' },
+      { id: 'programmingExperience', title: 'Programming Experience' },
+      { id: 'occupation', title: 'Occupation' },
       { id: 'timeTaken', title: 'Time Taken' },
       { id: 'answers', title: 'Answers' },
     ];
 
     // Create CSV stringifier
-    const { createObjectCsvStringifier } = require('csv-writer');
     const csvStringifier = createObjectCsvStringifier({ header });
 
     // Generate CSV string
@@ -172,7 +201,6 @@ app.get('/api/download-csv', async (req, res) => {
     res.status(500).json({ error: 'Failed to download CSV' });
   }
 });
-
 
 // Start server and bind to the port provided by Render or fallback to 5000
 const PORT = process.env.PORT || 5000;

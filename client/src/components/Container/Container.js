@@ -5,13 +5,38 @@ import './Container.css';
 import axios from 'axios';
 
 // Mock data
-const textArray = ["ciao come", "north south", "babilon manol"];
-const cardDataArray = [
-  ["ciao-come", "ciao-como", "come-ciao", "cociCome"],
-  ["north-west", "south-north", "north-south", "west-north"],
-  ["babilon", "manol", "babilonManol", "manol babilon"]
+const textArray = [
+  "move south",
+  "walk north",
+  "jump high",
+  "run fast",
+  "climb mountain",
+  "read book"
 ];
-const correctAnswers = ["ciao-come", "north-south", "babilonManol"]; // Define correct answers
+
+const cardDataArray = [
+  // For "move south" (kebab-case)
+  ["move-source", "move-south", "more-south", "mover-sound"],
+  // For "walk north" (camelCase)
+  ["walkNose", "walkNorth", "walkNorthEast", "walkerNorth"],
+  // For "jump high" (kebab-case)
+  ["jump-hike", "jump-high", "jump-height", "jumper-high"],
+  // For "run fast" (camelCase)
+  ["runForest", "runFast", "runnerFast", "runFaster"],
+  // For "climb mountain" (kebab-case)
+  ["climb-molehill", "climb-mountain", "climb-mountains", "climber-mountain"],
+  // For "read book" (camelCase)
+  ["readBooth", "readBook", "readerBook", "readingBooks"]
+];
+
+const correctAnswers = [
+  "move-south", // kebab-case
+  "walkNorth",  // camelCase
+  "jump-high",  // kebab-case
+  "runFast",    // camelCase
+  "climb-mountain", // kebab-case
+  "readBook"    // camelCase
+];
 
 const Container = () => {
   const [currentIndex, setCurrentIndex] = useState(0); // Tracks the current set of cards
@@ -97,8 +122,8 @@ const Container = () => {
     return (
       <div className="container">
         <h1 className="thank-you">Thank You!</h1>
-        <p className="success-message">Your data has been collected successfully.</p>
         <p className="time-message">You completed the quiz in {timeTaken} seconds.</p>
+        <p className="success-message">Your data has been collected successfully. You will be redirected soon.</p>
       </div>
     );
   }

@@ -1,11 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
 import Header from './components/Header/Header';
 import Introduction from './components/Introduction/Introduction';
 import SignUp from './components/SignUp/SignUp';
 import LogIn from './components/Login/LogIn';
 import Container from './components/Container/Container';
+
+const ProtectedRoute = ({ children }) => {
+  // Check if user is logged in by looking for 'user' in localStorage
+  const isLoggedIn = localStorage.getItem('user');
+
+  // If not logged in, redirect to login page
+  return isLoggedIn ? children : <Navigate to="/login" />;
+};
 
 function App() {
   return (
@@ -16,8 +24,17 @@ function App() {
           <Route path="/" element={<Introduction />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/login" element={<LogIn />} />
-          <Route path="/test" element={<Container />} />
-          <Route path="/about" element={<div>About Page</div>} /> 
+          <Route
+            path="/test"
+            element={
+              <ProtectedRoute>
+                <Container />
+              </ProtectedRoute>
+            }
+          />
+          <Route path="/about" element={<div>About Page</div>} />
+          {/* Catch-all route to redirect unmatched paths */}
+          <Route path="*" element={<Navigate to="/" />} />
         </Routes>
       </Router>
     </div>

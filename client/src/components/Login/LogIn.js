@@ -1,4 +1,3 @@
-// src/components/LogIn/LogIn.js
 import React, { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -39,7 +38,7 @@ function LogIn() {
       const user = await handleLogin(formData.email, formData.password); // Call the API function
       toast.success('Login successful');
       localStorage.setItem('user', JSON.stringify(user)); // Save user data to localStorage here
-      navigate('/test'); // Redirect to /test on successful login
+      setTimeout(() => navigate('/test'), 1000); // Delay navigation by 1 second
     } catch (error) {
       console.log(error.message || 'Failed to log in');
       setError(error.message || 'Failed to log in');
@@ -76,7 +75,18 @@ function LogIn() {
         </button>
       </form>
 
-     
+      {/* Add the voice for signup */}
+      <div className="signup-redirect">
+        <p>
+          Don't have an account?{' '}
+          <span
+            onClick={() => navigate('/signup')}
+            className="signup-link"
+          >
+            &nbsp;&nbsp;Sign up here
+          </span>
+        </p>
+      </div>
     </div>
   );
 }

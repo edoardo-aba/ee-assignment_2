@@ -2,49 +2,91 @@
 
 .sign-up-form {
   max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
-  background-color: #f9f9f9;
+  margin: 110px auto;
+  padding: 0 20px;
+  background-color: black; /* Match the main background color */
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   font-family: "Geist", sans-serif;
-  color: #333;
+  color: white; /* Use white text for better contrast on black background */
+  border: 1px solid white; /* Match the border style from main CSS */
+
+  button{
+    margin-top: 20px;
+    font-size: 20px;
+  }
 }
 
 .sign-up-form h2 {
   text-align: center;
-  color: #e43d12;
+  color: transparent; /* Use gradient for headings */
+  background: linear-gradient(to right, rgb(197, 2, 197), red);
+  -webkit-background-clip: text;
+  background-clip: text;
 }
 
 .sign-up-form input,
 .sign-up-form select {
   width: 100%;
   padding: 10px;
-  margin: 15px 0;
-  border: 1px solid #ccc;
+  margin: 10px 0;
+  border: 1px solid #8a8a8a; /* Match the input border style */
   border-radius: 5px;
   font-size: 1em;
+  background-color: black; /* Match main background */
+  color: white; /* Input text color */
 }
 
 .sign-up-button {
   width: 100%;
   padding: 12px;
-  background-color: #e43d12;
-  color: #fff;
+  background-color: black; /* Match main background */
+  color: transparent; /* Gradient text color */
   font-weight: bold;
-  border: none;
+  border: 1px solid #8a8a8a;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  background: linear-gradient(to right, rgb(197, 2, 197), red);
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: border-color 0.3s ease;
 }
 
 .sign-up-button:hover {
-  background-color: #cc370f;
+  border: 1px solid white; /* Highlight border on hover */
 }
 
 .error {
-  color: #e43d12;
+  color: purple; /* Subtle error highlight using purple */
   font-size: 0.9em;
   margin: -10px 0 10px;
   text-align: center;
+}
+
+/* New login redirection text */
+.login-redirect {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.9em;
+}
+
+.login-redirect p {
+  color: white; /* Consistent text color */
+}
+
+.login-redirect .login-link {
+  display: inline-block;
+  color: transparent; /* Use gradient for login link */
+  background: linear-gradient(to right, rgb(197, 2, 197), red);
+  -webkit-background-clip: text;
+  background-clip: text;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: underline;
+  transition: transform 0.2s ease, text-decoration 0.2s ease;
+}
+
+.login-redirect .login-link:hover {
+  text-decoration: underline; /* Add underline on hover */
+  transform: scale(1.1); /* Slightly enlarge the text */
 }

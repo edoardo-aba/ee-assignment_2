@@ -2,18 +2,17 @@
 *, *::before, *::after {
     box-sizing: border-box;
 }
-
-::selection { color: #EBE9E1; background-color: #E43D12; }
-::-moz-selection { color: #EBE9E1; background-color: #E43D12; }
+::selection { color: black; background-color: white; }
+::-moz-selection { color: black; background-color: white; }
 ::-webkit-scrollbar {
     width: 10px;
 }
 ::-webkit-scrollbar-track {
-    background: white;
+    background: black;
     border-radius: 50px;
 }
 ::-webkit-scrollbar-thumb {
-    background: #E43D12;
+    background: black;
     border-radius: 50px;
 }
 
@@ -21,8 +20,8 @@ html, body {
     margin: 0 auto;
     padding: 0;
     font-family: "Geist", sans-serif;
-    background-color: #EBE9E1;
-    color: #E43D12;
+    background-color: #000000;
+    color: #ffffff;
     font-weight: bold;
     font-size: 18px;
 }
@@ -35,24 +34,29 @@ html, body {
     align-items: center;
     justify-content: space-between;
     padding: 15px 30px;
-    background-color: #EBE9E1;
+    background-color: #000000;
     transition: background-color 0.3s ease;
     z-index: 1000;
+    border-bottom: 1px solid #808080;
 }
 
 .header.scrolled {
-    background-color: #E43D12;
-    color: #EBE9E1;
+    background-color: white;
+    color: black;
 }
 
 .header.scrolled a {
-    color: #EBE9E1;
+    color: black;
 }
 
 .header h1 {
     margin: 0;
     font-size: 1.5em;
     cursor: default;
+    color: transparent; /* This is needed to show the gradient */
+    background: linear-gradient(to right, rgb(197, 2, 197), red);
+    -webkit-background-clip: text; /* For webkit-based browsers */
+    background-clip: text;
 }
 
 .header nav ul {
@@ -70,9 +74,10 @@ html, body {
 /* Apply styles to both a tags and button elements in the nav */
 .header nav ul li a,
 .header nav ul li button {
-    color: #E43D12;
+    color: #f7f7f7;
     background: none;
     border: none;
+    padding: 10px 20px;
     font-size: 1em;
     font-family: inherit;
     text-decoration: none;
@@ -86,6 +91,6 @@ html, body {
 /* Hover effect for both a tags and button elements */
 .header nav ul li a:hover,
 .header nav ul li button:hover {
-    transform: scale(1.1);
+    transform: scale(1.2);
     text-decoration: none;
 }

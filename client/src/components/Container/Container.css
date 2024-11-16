@@ -1,3 +1,5 @@
+
+
 .container {
     display: flex;
     align-items:center;        /* Center vertically */
@@ -10,8 +12,23 @@
     border-radius: 10px;
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
     min-height: 50vh;
+    color: black;
+
+
     
   }
+
+  .container ::selection {
+    color: white;
+    background-color: black;
+  }
+  
+  .container ::-moz-selection {
+    color: white;
+    background-color: black;
+  }
+
+
   
   .question {
     font-size: 2rem;
@@ -27,4 +44,16 @@
     max-width: 600px;
     margin: auto;
   }
+
+  .thank-you {
+    font-size: 3rem; /* Adjust size as needed */
+    font-weight: bold;
+    text-align: center;
+    background: linear-gradient(to right, rgb(197, 2, 197), red); /* Gradient color */
+    -webkit-background-clip: text; /* Clip background to text (Webkit browsers) */
+    background-clip: text; /* Clip background to text */
+    color: transparent; /* Make the text itself transparent */
+  }
+
+
   

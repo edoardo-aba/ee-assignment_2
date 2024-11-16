@@ -1,19 +1,22 @@
 .card {
-    border: 2px solid #4caf50; /* Green border */
-    padding: 30px;
-    border-radius: 15px;
-    cursor: pointer;
-    background-color: #fff;
-    text-align: center;
-    transition: transform 0.3s, background-color 0.3s;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
-  
-  .card:hover {
-    background-color: #4caf50; /* Highlight on hover */
-    color: #fff; /* Change text color */
-    transform: scale(1.1);
-  }
-  
+  border: 2px solid transparent; /* Transparent border for gradient effect */
+  padding: 30px;
+  border-radius: 15px;
+  cursor: pointer;
+  background-color: #fff;
+  text-align: center;
+  transition: transform 0.3s, background-color 0.3s, border-color 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
+  font-weight: bold;
+  background-image: linear-gradient(white, white), linear-gradient(to right, rgb(197, 2, 197), red); /* Double gradient */
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
+.card:hover {
+  background-color: #4caf50; /* Highlight on hover */
+  color: black; /* Change text color */
+  transform: scale(1.1);
+  border-image: linear-gradient(to right, rgb(197, 2, 197), red) 1; /* Gradient border on hover */
+}
