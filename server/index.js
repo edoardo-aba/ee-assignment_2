@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { createObjectCsvStringifier } = require('csv-writer');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
@@ -124,6 +127,52 @@ app.post('/api/submit-answers', async (req, res) => {
     res.status(500).json({ error: 'Failed to save results' });
   }
 });
+
+// Download CSV endpoint
+app.get('/api/download-csv', async (req, res) => {
+  try {
+    // Retrieve all answers
+    const answers = await Answer.find().lean();
+
+    // Fetch all users once to minimize database calls
+    const users = await User.find().lean();
+    const userMap = new Map(users.map(user => [user.email, user.name]));
+
+    // Prepare records for CSV
+    const records = answers.map(answer => ({
+      email: answer.email,
+      name: userMap.get(answer.email) || 'Unknown', // Match name by email, fallback to 'Unknown'
+      timeTaken: answer.timeTaken,
+      answers: JSON.stringify(answer.answers),
+    }));
+
+    // Define CSV header
+    const header = [
+      { id: 'email', title: 'Email' },
+      { id: 'name', title: 'Name' },
+      { id: 'timeTaken', title: 'Time Taken' },
+      { id: 'answers', title: 'Answers' },
+    ];
+
+    // Create CSV stringifier
+    const { createObjectCsvStringifier } = require('csv-writer');
+    const csvStringifier = createObjectCsvStringifier({ header });
+
+    // Generate CSV string
+    const csv = csvStringifier.getHeaderString() + csvStringifier.stringifyRecords(records);
+
+    // Write the CSV file
+    const filePath = path.join(__dirname, 'answers.csv');
+    fs.writeFileSync(filePath, csv, 'utf-8');
+
+    // Send the CSV file to the client
+    res.download(filePath, 'answers.csv');
+  } catch (error) {
+    console.error('Error downloading CSV:', error);
+    res.status(500).json({ error: 'Failed to download CSV' });
+  }
+});
+
 
 // Start server and bind to the port provided by Render or fallback to 5000
 const PORT = process.env.PORT || 5000;

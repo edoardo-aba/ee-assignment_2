@@ -37,3 +37,22 @@ export const handleSignup = async (userData) => {
     }
   }
 };
+
+// Handle CSV Download
+export const handleDownloadCsv = async () => {
+  try {
+    const response = await axios.get('/api/download-csv', {
+      responseType: 'blob', // Ensure the response is handled as a binary blob
+    });
+
+    // Return the blob data to the caller
+    return response.data;
+  } catch (error) {
+    if (error.response) {
+      console.error('Download failed:', error.response.data.error);
+    } else {
+      console.error('Error during download:', error.message);
+    }
+    throw error;
+  }
+};
