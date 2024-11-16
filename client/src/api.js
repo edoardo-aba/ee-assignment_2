@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const handleLogin = async (email, password) => {
   try {
-    const response = await axios.post('/api/login', { email, password });
+    const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/login`, { email, password });
 
     if (response.status === 200) {
       return response.data.user; // Return user data to the caller
@@ -22,7 +22,7 @@ export const handleLogin = async (email, password) => {
 // Handle Signup
 export const handleSignup = async (userData) => {
   try {
-    const response = await axios.post('/api/signup', userData);
+    const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/signup`, userData);
 
     if (response.status === 201) {
         return response.data.user; // Return user data to the caller
@@ -41,7 +41,7 @@ export const handleSignup = async (userData) => {
 // Handle CSV Download
 export const handleDownloadCsv = async () => {
   try {
-    const response = await axios.get('/api/download-csv', {
+    const response = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/api/download-csv`, {
       responseType: 'blob', // Ensure the response is handled as a binary blob
     });
 

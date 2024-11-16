@@ -92,7 +92,7 @@ const Container = () => {
     if (finished && results) {
       const sendResults = async () => {
         try {
-          const response = await axios.post('/api/submit-answers', {
+          const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/api/submit-answers`, {
             ...results,
             timeTaken, // Add timeTaken to the results sent to the server
           });
