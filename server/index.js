@@ -6,6 +6,7 @@ require('dotenv').config();
 
 const app = express();
 
+// Enable CORS
 app.use(
   cors({
     origin: '*',
@@ -14,9 +15,11 @@ app.use(
   })
 );
 
+// Middleware to parse JSON
 app.use(bodyParser.json());
 app.use(express.json());
 
+// MongoDB Connection
 const mongoUri = process.env.MONGO_URI;
 mongoose.connect(mongoUri);
 
@@ -26,12 +29,14 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
+// Middleware to log requests
 app.use((req, res, next) => {
   console.log(`Request Type: ${req.method}`);
   console.log('Request Body:', req.body);
   next();
 });
 
+// User Schema and Model
 const userSchema = new mongoose.Schema({
   name: String,
   email: { type: String, required: true },
@@ -46,6 +51,7 @@ const userSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', userSchema);
 
+// Answer Schema and Model
 const answerSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
   email: { type: String, required: true },
@@ -61,10 +67,12 @@ const answerSchema = new mongoose.Schema({
 
 const Answer = mongoose.model('Answer', answerSchema);
 
+// Test route
 app.get('/', (req, res) => {
   res.json('Hello, World!');
 });
 
+// Signup endpoint
 app.post('/api/signup', async (req, res) => {
   try {
     const { name, email, password, ...otherDetails } = req.body;
@@ -82,6 +90,7 @@ app.post('/api/signup', async (req, res) => {
   }
 });
 
+// Login endpoint
 app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -101,6 +110,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// Submit answers endpoint
 app.post('/api/submit-answers', async (req, res) => {
   try {
     const results = req.body;
@@ -115,5 +125,9 @@ app.post('/api/submit-answers', async (req, res) => {
   }
 });
 
-// Export the app for @vercel/node
-module.exports = app;
+// Start server and bind to the port provided by Render or fallback to 5000
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
