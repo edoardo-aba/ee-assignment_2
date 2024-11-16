@@ -1,18 +1,21 @@
 require('dotenv').config(); // Import dotenv and configure it
-const express = require('express');
-const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
-const cors = require('cors'); // Import cors middleware
+
+const express = require('express'); // Import Express.js
+const mongoose = require('mongoose'); // Import Mongoose for MongoDB
+const bodyParser = require('body-parser'); // Middleware for parsing request bodies
+const cors = require('cors'); // Middleware for enabling Cross-Origin Resource Sharing
+
 
 const app = express();
 
-// Enable CORS to allow requests from any origin
-app.use(cors({
-  origin: '*',
-  methods: ['POST', 'GET', 'DELETE', 'PUT'], // Allowed HTTP methods
-  credentials: true // Allow credentials to be sent
-}));
-
+// Enable CORS for all origins and methods
+app.use(
+  cors({
+    origin: '*',
+    methods: ['POST', 'GET', 'DELETE', 'PUT'], // Allowed HTTP methods
+    credentials: true, // Allow credentials to be sent
+  })
+);
 
 // Middleware to parse JSON
 app.use(bodyParser.json());
@@ -72,11 +75,10 @@ const answerSchema = new mongoose.Schema(
 
 const Answer = mongoose.model('Answer', answerSchema);
 
-// test route for vercel
+// Test route for vercel
 app.get('/', (req, res) => {
   res.json('Hello, World!');
 });
-
 
 // Endpoint to handle signup
 app.post('/api/signup', async (req, res) => {
@@ -86,9 +88,9 @@ app.post('/api/signup', async (req, res) => {
     const newUser = new User({ name, email, password, ...otherDetails });
     const savedUser = await newUser.save();
 
-    res.status(201).json({ 
-      message: 'User registered successfully', 
-      user: { id: savedUser._id, email: savedUser.email } 
+    res.status(201).json({
+      message: 'User registered successfully',
+      user: { id: savedUser._id, email: savedUser.email },
     });
   } catch (error) {
     console.error('Signup Error:', error);
@@ -107,9 +109,9 @@ app.post('/api/login', async (req, res) => {
       return res.status(404).json({ error: 'Invalid email or password' });
     }
 
-    res.status(200).json({ 
-      message: 'Login successful', 
-      user: { id: user._id, email: user.email } 
+    res.status(200).json({
+      message: 'Login successful',
+      user: { id: user._id, email: user.email },
     });
   } catch (error) {
     console.error('Login Error:', error);
@@ -142,4 +144,3 @@ app.listen(PORT, '0.0.0.0', () => {
 });
 
 
-export default app;
