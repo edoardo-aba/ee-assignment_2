@@ -20,11 +20,11 @@
 html, body {
     margin: 0 auto;
     padding: 0;
-    font-family: Arial, sans-serif;
+    font-family: "Geist", sans-serif;
     background-color: #EBE9E1;
     color: #E43D12;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 18px;
 }
 
 .header {
