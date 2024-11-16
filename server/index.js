@@ -190,12 +190,12 @@ app.get('/api/download-csv', async (req, res) => {
     // Generate CSV string
     const csv = csvStringifier.getHeaderString() + csvStringifier.stringifyRecords(records);
 
-    // Write the CSV file
-    const filePath = path.join(__dirname, 'answers.csv');
-    fs.writeFileSync(filePath, csv, 'utf-8');
+    // Set the response headers
+    res.setHeader('Content-Type', 'text/csv');
+    res.setHeader('Content-Disposition', 'attachment; filename="answers.csv"');
 
-    // Send the CSV file to the client
-    res.download(filePath, 'answers.csv');
+    // Send the CSV data
+    res.status(200).send(csv);
   } catch (error) {
     console.error('Error downloading CSV:', error);
     res.status(500).json({ error: 'Failed to download CSV' });
