@@ -1,6 +1,6 @@
 - create button from the login to the sign up where i say you dont have an account?
 - same for the signup where i say do you already have an account?
 - enable if the route does not exist 404
-- save the time it takes to complete
 - enable to go to the route \test only if the user is logged in 
 - when click on whos the best add router to the main page
+- create about page where i explain where everything is hosted
