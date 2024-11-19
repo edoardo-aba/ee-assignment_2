@@ -1,5 +1,13 @@
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  50% { transform: translateX(10px); }
+  75% { transform: translateX(-10px); }
+  100% { transform: translateX(0); }
+}
+
 .card {
-  border: 2px solid transparent; /* Transparent border for gradient effect */
+  border: 2px solid transparent;
   padding: 30px;
   border-radius: 15px;
   cursor: pointer;
@@ -9,14 +17,18 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   font-size: 1.2rem;
   font-weight: bold;
-  background-image: linear-gradient(white, white), linear-gradient(to right, rgb(197, 2, 197), red); /* Double gradient */
+  background-image: linear-gradient(white, white), linear-gradient(to right, rgb(197, 2, 197), red);
   background-origin: border-box;
   background-clip: padding-box, border-box;
 }
 
 .card:hover {
-  background-color: #4caf50; /* Highlight on hover */
-  color: black; /* Change text color */
+  background-color: #4caf50;
+  color: black;
   transform: scale(1.1);
-  border-image: linear-gradient(to right, rgb(197, 2, 197), red) 1; /* Gradient border on hover */
+  border-image: linear-gradient(to right, rgb(197, 2, 197), red) 1;
+}
+
+.card.shake {
+  animation: shake 0.5s; /* Apply shake animation */
 }
