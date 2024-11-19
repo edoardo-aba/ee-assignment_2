@@ -43,6 +43,8 @@
   -webkit-background-clip: text;
   background-clip: text;
   transition: border-color 0.3s ease;
+  margin-top: 30px;
+  font-size: 20px;
 }
 
 .sign-up-button:hover {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { handleDownloadCsv } from '../../api';
 import './Introduction.css';
 
 function Introduction() {
@@ -12,21 +11,6 @@ function Introduction() {
 
   const handleLoginClick = () => {
     navigate('/login');
-  };
-
-  const handleDownloadClick = async () => {
-    try {
-      const blob = await handleDownloadCsv(); // Call the function from api.js
-      const url = window.URL.createObjectURL(new Blob([blob]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download', 'answers.csv');
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    } catch (error) {
-      console.error('Error downloading the file:', error);
-    }
   };
 
   return (
@@ -55,7 +39,6 @@ function Introduction() {
       <div className="introduction-buttons">
         <button className="button signup" onClick={handleSignUpClick}>sign up</button>
         <button className="button login" onClick={handleLoginClick}>login</button>
-        <button className="button download" onClick={handleDownloadClick}>Download .csv</button>
       </div>
     </div>
   );
