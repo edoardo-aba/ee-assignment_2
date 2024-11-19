@@ -1,6 +1,6 @@
 Critical changes
 - change the task/ instruction be more detailed
-- make it more simple: age range, boolean English speaker, boolean Programming experience (yes or no)
+- make it more simple: remove gender age range (listbox), boolean English speaker yes or no, boolean Programming experience (yes or no), remove occupation field
 - keep trying if select wrong answer so i record only the time the user taks
 - add more tasks like 14 16 and in some increase the number of word per test
 - add a toy practice after sign up

@@ -1,20 +1,13 @@
-/* src/components/SignUp/SignUp.css */
-
 .sign-up-form {
-  max-width: 400px;
+  max-width: 500px; /* Increased width */
   margin: 110px auto;
-  padding: 0 20px;
+  padding: 20px; /* Added more padding */
   background-color: black; /* Match the main background color */
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   font-family: "Geist", sans-serif;
   color: white; /* Use white text for better contrast on black background */
   border: 1px solid white; /* Match the border style from main CSS */
-
-  button{
-    margin-top: 20px;
-    font-size: 20px;
-  }
 }
 
 .sign-up-form h2 {
@@ -62,6 +55,34 @@
   margin: -10px 0 10px;
   text-align: center;
 }
+
+.radio-group {
+  display: flex;
+  flex-direction: column; /* Stack title and radio buttons vertically */
+  margin: 10px 0; /* Add spacing around the group */
+}
+
+.radio-group p {
+  margin-bottom: 5px; /* Add spacing between the title and the radio buttons */
+  color: white; /* Match text color */
+}
+
+.radio-group label {
+  display: flex; /* Align radio button and label on the same row */
+  align-items: center; /* Vertically align */
+  gap: 8px; /* Adjust space between radio and label */
+  font-size: 1em; /* Ensure text is readable */
+  color: white; /* Match text color */
+  padding-left: 5px; /* Reduce spacing from the left border */
+}
+
+.radio-group input[type="radio"] {
+  margin: 0; /* Remove default margins */
+  padding: 0; /* Remove extra padding */
+  width: 18px; /* Adjust width for consistent size */
+  height: 18px; /* Adjust height for consistent size */
+}
+
 
 /* New login redirection text */
 .login-redirect {
