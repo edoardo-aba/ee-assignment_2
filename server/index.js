@@ -36,7 +36,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// Updated User Schema and Model
+// User Schema and Model
 const userSchema = new mongoose.Schema({
   name: String,
   email: { type: String, required: true },
@@ -47,6 +47,18 @@ const userSchema = new mongoose.Schema({
 }, { collection: 'users' });
 
 const User = mongoose.model('User', userSchema);
+
+// Answers Schema and Model
+const answerSchema = new mongoose.Schema({
+  userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
+  email: { type: String, required: true },
+  timeTaken: {
+    kebabCase: { type: String, required: true },
+    camelCase: { type: String, required: true },
+  },
+}, { collection: 'answers' });
+
+const Answer = mongoose.model('Answer', answerSchema);
 
 // Test route
 app.get('/', (req, res) => {
@@ -88,6 +100,30 @@ app.post('/api/login', async (req, res) => {
   } catch (error) {
     console.error('Login Error:', error);
     res.status(500).json({ error: 'Failed to login' });
+  }
+});
+
+// Submit Answers endpoint
+app.post('/api/submit-answers', async (req, res) => {
+  try {
+    const { userId, email, timeTaken } = req.body;
+
+    // Validate required fields
+    if (!userId || !email || !timeTaken || !timeTaken.kebabCase || !timeTaken.camelCase) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    // Save the answer
+    const newAnswer = new Answer({ userId, email, timeTaken });
+    const savedAnswer = await newAnswer.save();
+
+    res.status(201).json({
+      message: 'Answers submitted successfully',
+      answer: savedAnswer,
+    });
+  } catch (error) {
+    console.error('Submit Answers Error:', error);
+    res.status(500).json({ error: 'Failed to save answers' });
   }
 });
 
