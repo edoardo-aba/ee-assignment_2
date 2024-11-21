@@ -28,9 +28,7 @@ function Header() {
           <li>
             <button onClick={() => navigate('/')}>home</button>
           </li>
-          <li>
-            <button onClick={() => navigate('/about')}>about</button>
-          </li>
+         
         </ul>
       </nav>
     </header>
