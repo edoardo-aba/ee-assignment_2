@@ -107,11 +107,11 @@ const Container = () => {
             userId: results.userId,
             email: results.email,
             timeTaken: {
-              kebabCase: timeTakenKebabCase,
-              camelCase: timeTakenCamelCase,
+              kebabCase: parseFloat(timeTakenKebabCase), // Convert strings to numbers
+              camelCase: parseFloat(timeTakenCamelCase),
             },
           });
-
+      
           if (response.status === 200) {
             console.log('Results submitted successfully');
           } else {
@@ -121,6 +121,7 @@ const Container = () => {
           console.error('Error submitting results:', error);
         }
       };
+      
 
       sendResults();
       localStorage.removeItem('user');

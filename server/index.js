@@ -53,10 +53,11 @@ const answerSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
   email: { type: String, required: true },
   timeTaken: {
-    kebabCase: { type: String, required: true },
-    camelCase: { type: String, required: true },
+    kebabCase: { type: Number, required: true }, // Ensure these are stored as numbers
+    camelCase: { type: Number, required: true },
   },
 }, { collection: 'answers' });
+
 
 const Answer = mongoose.model('Answer', answerSchema);
 
