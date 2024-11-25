@@ -1,6 +1,4 @@
-﻿Certainly! Here is the complete content for your `.md` file with all the setup steps:
 
-\# Experiment Assignment Project
 
 This project is a full-stack web application designed to manage and analyze experiments. It is composed of two main components:
 
@@ -126,9 +124,3 @@ npm start
 1. \*\*Open your browser and navigate to\*\* `http://localhost:3000` \*\*to interact with the application\*\*.
 
 \---
-
-\## Notes
-
-- The `.env` files are crucial for proper configuration. Update them to switch between local development and production environments.
-- Ensure your MongoDB instance is live and properly configured before running the backend server.
-- Keep your database credentials secure and do not share them publicly.
