@@ -1,3 +1,4 @@
+// Container.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Card from '../Card/Card';
@@ -41,9 +42,10 @@ const Container = () => {
   const [shuffledCards, setShuffledCards] = useState([]);
   const [startTime, setStartTime] = useState(null);
   const [taskStartTime, setTaskStartTime] = useState(null);
-  const [shakeCard, setShakeCard] = useState(null); // Track the card to shake
+  const [shakeCard, setShakeCard] = useState(null);
   const [timeTakenCamelCase, setTimeTakenCamelCase] = useState(0);
   const [timeTakenKebabCase, setTimeTakenKebabCase] = useState(0);
+  const [totalTime, setTotalTime] = useState(null); // Added for total time
   const navigate = useNavigate();
 
   const shuffleArray = (array) => array.sort(() => Math.random() - 0.5);
@@ -85,7 +87,12 @@ const Container = () => {
       if (!prevResults) return prevResults;
       const updatedAnswers = [
         ...prevResults.answers,
-        { text: textArray[currentIndex], selected: value, correct: isCorrect },
+        { 
+          text: textArray[currentIndex], 
+          selected: value, 
+          correct: isCorrect,
+          timeTaken: parseFloat(taskDuration), // Store time taken for this answer
+        },
       ];
       return { ...prevResults, answers: updatedAnswers };
     });
@@ -95,6 +102,8 @@ const Container = () => {
     } else {
       setTimeTakenKebabCase((prev) => prev.toFixed(2));
       setTimeTakenCamelCase((prev) => prev.toFixed(2));
+      const totalDuration = ((Date.now() - startTime) / 1000).toFixed(2); // Calculate total time
+      setTotalTime(totalDuration);
       setFinished(true);
     }
   };
@@ -107,12 +116,14 @@ const Container = () => {
             userId: results.userId,
             email: results.email,
             timeTaken: {
-              kebabCase: parseFloat(timeTakenKebabCase), // Convert strings to numbers
+              kebabCase: parseFloat(timeTakenKebabCase),
               camelCase: parseFloat(timeTakenCamelCase),
+              total: parseFloat(totalTime), // Include total time
             },
+            answers: results.answers, // Include individual answers with timeTaken
           });
       
-          if (response.status === 200) {
+          if (response.status === 200 || response.status === 201) {
             console.log('Results submitted successfully');
           } else {
             console.error('Failed to submit results');
@@ -122,17 +133,17 @@ const Container = () => {
         }
       };
       
-
       sendResults();
       localStorage.removeItem('user');
       setTimeout(() => navigate('/'), 5000);
     }
-  }, [finished, results, timeTakenCamelCase, timeTakenKebabCase]);
+  }, [finished, results, timeTakenCamelCase, timeTakenKebabCase, totalTime, navigate]);
 
   if (finished) {
     return (
       <div className="container">
         <h1 className="thank-you">Thank You!</h1>
+        <p>You took {totalTime} seconds in total.</p>
         <p>You took {timeTakenCamelCase} seconds for camelCase tasks and {timeTakenKebabCase} seconds for kebab-case tasks.</p>
         <p>Your data has been collected successfully. Redirecting...</p>
       </div>
@@ -148,7 +159,7 @@ const Container = () => {
             key={index}
             value={value}
             onClick={handleCardClick}
-            shake={value === shakeCard} // Pass `shake` to card
+            shake={value === shakeCard}
           />
         ))}
       </div>

@@ -1,3 +1,4 @@
+// server.js
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
@@ -53,11 +54,19 @@ const answerSchema = new mongoose.Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
   email: { type: String, required: true },
   timeTaken: {
-    kebabCase: { type: Number, required: true }, // Ensure these are stored as numbers
+    kebabCase: { type: Number, required: true },
     camelCase: { type: Number, required: true },
+    total: { type: Number, required: true }, // Added total time
   },
+  answers: [
+    {
+      text: String,
+      selected: String,
+      correct: Boolean,
+      timeTaken: Number, // Time taken for this answer
+    },
+  ],
 }, { collection: 'answers' });
-
 
 const Answer = mongoose.model('Answer', answerSchema);
 
@@ -107,15 +116,23 @@ app.post('/api/login', async (req, res) => {
 // Submit Answers endpoint
 app.post('/api/submit-answers', async (req, res) => {
   try {
-    const { userId, email, timeTaken } = req.body;
+    const { userId, email, timeTaken, answers } = req.body;
 
     // Validate required fields
-    if (!userId || !email || !timeTaken || !timeTaken.kebabCase || !timeTaken.camelCase) {
+    if (
+      !userId || 
+      !email || 
+      !timeTaken || 
+      timeTaken.kebabCase == null || 
+      timeTaken.camelCase == null || 
+      timeTaken.total == null || 
+      !answers
+    ) {
       return res.status(400).json({ error: 'Missing required fields' });
     }
 
     // Save the answer
-    const newAnswer = new Answer({ userId, email, timeTaken });
+    const newAnswer = new Answer({ userId, email, timeTaken, answers });
     const savedAnswer = await newAnswer.save();
 
     res.status(201).json({
@@ -128,7 +145,7 @@ app.post('/api/submit-answers', async (req, res) => {
   }
 });
 
-// Start server and bind to the port provided by Render or fallback to 5000
+// Start server and bind to the port provided by the environment or fallback to 5000
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
