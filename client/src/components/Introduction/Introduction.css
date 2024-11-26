@@ -17,7 +17,7 @@
     flex: 2;
     text-align: left;           /* Align text to the left */
     padding-right: 20px;
-    max-width: 550px;           /* Limit the width for text wrapping */
+    max-width: 700px;           /* Limit the width for text wrapping */
     margin-right: 40px;         /* Increase spacing between text and buttons */
     word-break: break-word;     /* Ensure long words or links break to new line */
 }
