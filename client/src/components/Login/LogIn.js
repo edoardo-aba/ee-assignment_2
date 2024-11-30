@@ -28,6 +28,9 @@ function LogIn() {
 
     if (formData.password.length < 6) {
       setError('Password must be at least 6 characters long.');
+      toast.error('Password must be at least 6 characters long.', {
+        position: "top-right", // Toast position for errors
+      });
       return;
     }
 
@@ -36,13 +39,17 @@ function LogIn() {
 
     try {
       const user = await handleLogin(formData.email, formData.password); // Call the API function
-      toast.success('Login successful');
+      toast.success('Login successful', {
+        position: "top-right", // Toast position for success
+      });
       localStorage.setItem('user', JSON.stringify(user)); // Save user data to localStorage here
       setTimeout(() => navigate('/test'), 1000); // Delay navigation by 1 second
     } catch (error) {
       console.log(error.message || 'Failed to log in');
       setError(error.message || 'Failed to log in');
-      toast.error(error.message || 'Failed to log in');
+      toast.error(error.message || 'Failed to log in', {
+        position: "top-right", // Toast position for errors
+      });
     } finally {
       setLoading(false);
     }
@@ -51,7 +58,11 @@ function LogIn() {
   return (
     <div className="log-in-form">
       <h2>Log In</h2>
-      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} />
+      <ToastContainer 
+        position="top-left" // Default position for all toasts
+        autoClose={3000} 
+        hideProgressBar={false} 
+      />
     
       <form onSubmit={handleSubmit}>
         <input
@@ -75,7 +86,6 @@ function LogIn() {
         </button>
       </form>
 
-      {/* Add the voice for signup */}
       <div className="signup-redirect">
         <p>
           Don't have an account?{' '}
