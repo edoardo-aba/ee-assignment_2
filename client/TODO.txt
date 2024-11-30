@@ -1,4 +1,1 @@
-Critical changes:
-
-- save the time it takes for each card so i have raw data and not aggregate time
-- remove scroll
+# DONE GATHERING DATA
