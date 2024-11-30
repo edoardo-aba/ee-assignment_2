@@ -11,11 +11,11 @@ Follow the instructions below to set up and run the project.
 
 1. Create a `.env` File
 
-Inside the `client` folder, create a `.env` file and include the following fields:
+Inside the `client` folder, create a `.env` file and include the following fields (comment the second one if run locally):
 
 ```env
 
-REACT_APP_API_BASE_URL=http://localhost:5000  # to run it locally if the project is offline
+REACT_APP_API_BASE_URL=http://localhost:5000  // to run it locally if the project is offline
 
 REACT_APP_API_BASE_URL=https://ee-assignment-2.onrender.com  // if the project is online
 
