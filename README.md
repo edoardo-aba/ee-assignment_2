@@ -43,12 +43,9 @@ npm start
 
 The frontend will be accessible at `http://localhost:3000`.
 
-\--------------------------------------------------------------------------
 
 
-
-
-# Server Setup, to run it locally (Backend)
+# Server Setup (Backend)
 
 1. Create a `.env` File
 
