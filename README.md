@@ -3,7 +3,7 @@
 This project is a full-stack web application designed to manage and analyze experiments. It is composed of two main components:
 
 - Client (Frontend): A React-based user interface.
-- Server (Backend): A Node.js and MongoDB-powered API.
+- Server (Backend): A Node.js, Express and MongoDB-powered API.
 
 Follow the instructions below to set up and run the project.
 
