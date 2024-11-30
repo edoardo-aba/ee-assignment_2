@@ -7,7 +7,7 @@ This project is a full-stack web application designed to manage and analyze expe
 
 Follow the instructions below to set up and run the project.
 
-\ Client Setup (Frontend)
+# Client Setup (Frontend)
 
 1. Create a `.env` File
 
@@ -25,21 +25,21 @@ REACT_APP_API_BASE_URL=https://ee-assignment-2.onrender.com  // if the project i
 
 Open a terminal, navigate to the `client` folder, and run:
 
-\```bash
+```bash
 
 npm install
 
-\```
+```
 
 3. Run the Frontend
 
 Start the React development server by running:
 
-\```bash
+```bash
 
 npm start
 
-\```
+```
 
 The frontend will be accessible at `http://localhost:3000`.
 
@@ -48,19 +48,19 @@ The frontend will be accessible at `http://localhost:3000`.
 
 
 
-\ Server Setup, to run it locally (Backend)
+# Server Setup, to run it locally (Backend)
 
 1. Create a `.env` File
 
 Inside the `server` folder, create a `.env` file and include the following fields:
 
-\```env
+```env
 
 MONGO_URI=mongodb+srv://<username>:<password>@experiment.imnwh.mongodb.net/register
 
 PORT=5000
 
-\```
+```
 
 - Replace `<username>` and `<password>` with your MongoDB Atlas credentials.
 
