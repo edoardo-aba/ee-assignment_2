@@ -15,9 +15,9 @@ Inside the `client` folder, create a `.env` file and include the following field
 
 ```env
 
-REACT\_APP\_API\_BASE\_URL=http://localhost:5000  # to run it locally if the project is offline
+REACT_APP_API_BASE_URL=http://localhost:5000  # to run it locally if the project is offline
 
-REACT\_APP\_API\_BASE\_URL=https://ee-assignment-2.onrender.com  // if the project is online
+REACT_APP_API_BASE_URL=https://ee-assignment-2.onrender.com  // if the project is online
 
 ```
 
@@ -43,7 +43,7 @@ npm start
 
 The frontend will be accessible at `http://localhost:3000`.
 
-\---
+\--------------------------------------------------------------------------
 
 
 
@@ -56,7 +56,7 @@ Inside the `server` folder, create a `.env` file and include the following field
 
 \```env
 
-MONGO\_URI=mongodb+srv://<username>:<password>@experiment.imnwh.mongodb.net/register
+MONGO_URI=mongodb+srv://<username>:<password>@experiment.imnwh.mongodb.net/register
 
 PORT=5000
 
