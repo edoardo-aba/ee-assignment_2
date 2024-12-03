@@ -1,3 +1,8 @@
 # check z-score
 # check standard deviation 
+# check T test
+# check P value
+# check Cohens' d 
 # check report at 2.3 partecipants for some data that we need 
+# ha detto di usare jasp per le statistics https://jasp-stats.org per fare delle statistics bases on lez 9
+# T test must be done in jasp the classic one, paired Samples T test
