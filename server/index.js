@@ -141,6 +141,7 @@ app.post('/api/submit-answers', async (req, res) => {
     });
   } catch (error) {
     console.error('Submit Answers Error:', error);
+    
     res.status(500).json({ error: 'Failed to save answers' });
   }
 });
