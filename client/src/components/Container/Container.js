@@ -135,7 +135,7 @@ const Container = () => {
       
       sendResults();
       localStorage.removeItem('user');
-      setTimeout(() => navigate('/'), 5000);
+      setTimeout(() => navigate('/'), 8000);
     }
   }, [finished, results, timeTakenCamelCase, timeTakenKebabCase, totalTime, navigate]);
 
