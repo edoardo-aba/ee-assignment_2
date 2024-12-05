@@ -18,6 +18,7 @@ This project is a web application designed to test and analyze user performance 
 - The backend securely stores this data using a MongoDB database.
 - Registered users log in to access the testing platform, with credentials validated by the backend API.
 
+![Introduction Page](./Data/Images/introduction.png)
 ![Signup Page](./Data/Images/signup.png)
 
 ### **2. Test Mechanics**
@@ -46,7 +47,6 @@ This project is a web application designed to test and analyze user performance 
   - Test Interface
 - Protected routes ensure only authenticated users can access the test.
 
-![Introduction Page](./Data/Images/introduction.png)
 
 ---
 ---
