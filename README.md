@@ -1,9 +1,75 @@
 
 
-This project is a full-stack web application designed to manage and analyze experiments. It is composed of two main components:
+# Project Overview
 
-- Client (Frontend): A React-based user interface.
-- Server (Backend): A Node.js, Express and MongoDB-powered API.
+This project is a web application designed to test and analyze user performance in identifying text formats like **camelCase** and **kebab-case**. It evaluates users' speed and accuracy in distinguishing between these two text styles and collects data to explore how different text formats influence readability and interaction.
+
+---
+
+## How It Works
+
+### **1. User Registration and Login**
+- Users sign up through a form providing basic details like:
+  - Name
+  - Email
+  - Password
+  - Age group
+  - Programming experience
+- The backend securely stores this data using a MongoDB database.
+- Registered users log in to access the testing platform, with credentials validated by the backend API.
+
+### **2. Test Mechanics**
+- Upon successful login, users are presented with a series of phrases.
+- For each phrase, users must select the correct format (**camelCase** or **kebab-case**) from multiple options displayed on interactive cards.
+- The test tracks:
+  - **Response Time**: Time taken to select an answer.
+  - **Correctness**: Whether the selected answer matches the expected format.
+
+### **3. Data Collection and Analysis**
+- Users' selections, correctness, and response times are recorded.
+- Data is sent to the backend for storage and processing.
+- At the end of the test:
+  - Users are shown their **total time**, a breakdown by text format, and thanked.
+  - They are automatically redirected after viewing results.
+
+### **4. User Flow**
+- The application uses **React Router** to guide users through key pages:
+  - Introduction
+  - Signup
+  - Login
+  - Test Interface
+- Protected routes ensure only authenticated users can access the test.
+
+---
+
+## Technology Stack
+
+### **Frontend**
+- **React**: User interface and routing.
+- **CSS**: Styling for components.
+- **React Toastify**: For notifications (e.g., success, error messages).
+- **Axios**: For API communication.
+
+### **Backend**
+- **Express.js**: API server and routing.
+- **MongoDB**: For database operations.
+- **Mongoose**: For schema definition and interaction with the database.
+
+### **API Endpoints**
+- **Signup**: Registers new users.
+- **Login**: Authenticates existing users.
+- **Submit Answers**: Records test results.
+
+---
+
+## Purpose of the Project
+
+This project is a comprehensive tool for:
+- Collecting data on how users interact with different text formats.
+- Analyzing response times and accuracy for **camelCase** and **kebab-case** formats.
+- Providing insights into the impact of text styles on readability and usability.
+
+
 
 Follow the instructions below to set up and run the project.
 
