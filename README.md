@@ -18,6 +18,8 @@ This project is a web application designed to test and analyze user performance 
 - The backend securely stores this data using a MongoDB database.
 - Registered users log in to access the testing platform, with credentials validated by the backend API.
 
+![Signup Page](./Data/Images/signup.png)
+
 ### **2. Test Mechanics**
 - Upon successful login, users are presented with a series of phrases.
 - For each phrase, users must select the correct format (**camelCase** or **kebab-case**) from multiple options displayed on interactive cards.
@@ -25,12 +27,16 @@ This project is a web application designed to test and analyze user performance 
   - **Response Time**: Time taken to select an answer.
   - **Correctness**: Whether the selected answer matches the expected format.
 
+![Cards Interface](./Data/Images/cards.png)
+
 ### **3. Data Collection and Analysis**
 - Users' selections, correctness, and response times are recorded.
 - Data is sent to the backend for storage and processing.
 - At the end of the test:
   - Users are shown their **total time**, a breakdown by text format, and thanked.
   - They are automatically redirected after viewing results.
+
+![Finish Page](./Data/Images/finish.png)
 
 ### **4. User Flow**
 - The application uses **React Router** to guide users through key pages:
@@ -40,6 +46,9 @@ This project is a web application designed to test and analyze user performance 
   - Test Interface
 - Protected routes ensure only authenticated users can access the test.
 
+![Introduction Page](./Data/Images/introduction.png)
+
+---
 ---
 
 ## Technology Stack
